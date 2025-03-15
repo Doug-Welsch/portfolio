@@ -1,1 +1,1 @@
-Doug Welsch' Bioinformatician Portfolio (WIP)
+Doug Welsch's Bioinformatics Portfolio (WIP)
