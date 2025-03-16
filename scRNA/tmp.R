@@ -10,7 +10,6 @@ library(tidyverse)
 # library(scCustomize)
 
 # https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE127465
-
 meta.df <- fread("./data/GSE127465_mouse_cell_metadata_15939x12.tsv.gz")
 
 raw.files <- list.files("./data/GSE127465/", full.names = T)
