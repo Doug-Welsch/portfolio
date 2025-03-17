@@ -1,5 +1,5 @@
 # 3/16/2025
-# Generating Custom SPRING Plots
+# Generating Custom SPRING Plots.
 # Doug Welsch
 
 setwd("~/RProjects/portfolio/scRNA/")
@@ -35,6 +35,7 @@ plotMetaSPRING <- function(sobj,
                        height = 8) {
   # Generates categorical SPRING reduction plot
   # TODO(dawelsch): Add overlay labels
+  # TODO(dawelsch): In practice, would use DimPlot()
   
   set.seed(seed)
   spring.df <- as.data.frame(sobj@reductions$spring@cell.embeddings)

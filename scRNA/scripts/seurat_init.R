@@ -42,6 +42,8 @@ for (cn in colnames(meta.df)) {
 mm.sobj$KEY <- NULL
 # Add processed counts
 mm.sobj[["RNA"]]@data <- as(t(norm.mat), "CsparseMatrix")
+rownames(mm.sobj@assays$RNA@data) <- rownames(mm.sobj@assays$RNA@counts)
+colnames(mm.sobj@assays$RNA@data) <- colnames(mm.sobj@assays$RNA@counts)
 # Add SPRING
 spring.df <- mm.sobj@meta.data[, c("x", "y")]
 colnames(spring.df) <- c("SPRING_1", "SPRING_2")
