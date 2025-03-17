@@ -6,6 +6,7 @@ setwd("~/RProjects/portfolio/scRNA/")
 
 library(Seurat) # TODO(dawelsch): 4.3.0
 library(ggplot2)
+library(stringr)
 
 generateColors <- function(n, seed = NULL) {
   # Generates a character vector of n evenly spaced HCL hues. If seed is
@@ -33,6 +34,7 @@ plotMetaSPRING <- function(sobj,
                        width = 8,
                        height = 8) {
   # Generates categorical SPRING reduction plot
+  # TODO(dawelsch): Add overlay labels
   
   set.seed(seed)
   spring.df <- as.data.frame(sobj@reductions$spring@cell.embeddings)
@@ -86,17 +88,23 @@ plotMetaSPRING <- function(sobj,
 
 mm.sobj <- readRDS("./outs/SeuratObject/SeuratObj_init.rds")
 
-# Major Cell Types
-plotMetaSPRING(mm.sobj,
-               fill = "Major.cell.type",
-               save = "./outs/SPRING/SPRING_MajorCellTypes.pdf")
-cell.types <- unique(mm.sobj@meta.data$Major.cell.type)
-for (ct in cell.types) {
-  print(ct)
+# Plot meta variables of interest
+
+meta.of.interest <- c("Tumor.or.healthy", "Biological.replicate", "Library", "Library.prep.batch", "Major.cell.type", "Minor.subset")
+for (moi in meta.of.interest) {
+  fn <- gsub(" ", "", str_to_title(gsub(".", " ", moi, fixed = T)))
+  print(fn)
+  # Cumulative plot
   plotMetaSPRING(mm.sobj,
-                 fill = "Major.cell.type",
-                 highlight = ct,
-                 save = paste0("./outs/SPRING/SPRING_MajorCellTypes_", gsub(" ", "", ct), ".pdf"))
+                 fill = moi,
+                 save = paste0("./outs/SPRING/SPRING_", fn, ".pdf"))
+  # Individual plots
+  categories <- unique(mm.sobj@meta.data[[moi]])
+  for (cat in categories) {
+    print(cat)
+    plotMetaSPRING(mm.sobj,
+                   fill = moi,
+                   highlight = cat,
+                   save = paste0("./outs/SPRING/SPRING_", fn, "_", gsub(" ", "", cat), ".pdf"))
+  }
 }
-
-
