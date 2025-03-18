@@ -8,5 +8,3 @@ Input data (`./data/*`) may be downloaded from the following paper: <br />
 </blockquote>
 You can access the dataset <strong>GSE127465</strong> from NCBI GEO using the following link: <br />
 <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE127465">Download GSE127465</a> <br />
-Scripts: <br />
-Notes: <br />
